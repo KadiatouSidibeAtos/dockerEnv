@@ -6,3 +6,8 @@ services:
       - "8000:5000"
   redis:
     image: "redis:alpine"
+  webmethods:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: webmethods:latest
