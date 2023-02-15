@@ -2,8 +2,11 @@ version: "3.9"
 services:
   web:
     build: .
-    ports:
-      - "8000:5000"
+    image: webimage:latest
+    deploy:
+      labels:
+        - "traefik.http.routers.web.rule=Host(`localhost`) && Path(`/`)"
+        - "traefik.http.services.web.loadbalancer.server.port=8585"
   redis:
     image: "redis:alpine"
   webmethods:
