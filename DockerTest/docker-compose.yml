@@ -4,9 +4,29 @@ services:
     build: .
     image: webimage:latest
     deploy:
+      mode: replicated
+      replicas: 5
+      placement:
+        constraints:
+          - node.role == worker
+      update_config:
+        parallelism: 2
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
       labels:
-        - "traefik.http.routers.web.rule=Host(`localhost`) && Path(`/`)"
-        - "traefik.http.services.web.loadbalancer.server.port=8585"
+      - "traefik.http.routers.web.rule=Host(`localhost`) && Path(`/`)"
+      - "traefik.http.services.web.loadbalancer.server.port=8585"
   redis:
     image: "redis:alpine"
   webmethods:
@@ -14,3 +34,27 @@ services:
       context: .
       dockerfile: Dockerfile
     image: webmethods:latest
+    deploy:
+      mode: replicated
+      replicas: 5
+      placement:
+        constraints:
+          - node.role == worker
+      update_config:
+        parallelism: 2
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+      labels:
+      - "traefik.http.routers.web.rule=Host(`localhost`) && Path(`/`)"
+      - "traefik.http.services.web.loadbalancer.server.port=8585"
