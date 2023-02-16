@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: webmethods:latest
+    image: myapp:latest
     deploy:
       mode: replicated
       replicas: 5
