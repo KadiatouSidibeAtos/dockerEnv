@@ -6,9 +6,6 @@ services:
     deploy:
       mode: replicated
       replicas: 5
-      placement:
-        constraints:
-          - node.role == worker
       update_config:
         parallelism: 2
         delay: 10s
@@ -37,9 +34,6 @@ services:
     deploy:
       mode: replicated
       replicas: 5
-      placement:
-        constraints:
-          - node.role == worker
       update_config:
         parallelism: 2
         delay: 10s
