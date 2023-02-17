@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     image: myapp:latest
     ports:
-      - "8000:5000"
+      - "9000:5000"
     deploy:
       mode: replicated
       replicas: 5
