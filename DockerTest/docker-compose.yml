@@ -3,8 +3,6 @@ services:
   web:
     build: .
     image: webimage:latest
-    ports:
-      - "1111:5000"
     deploy:
       mode: replicated
       replicas: 5
@@ -30,8 +28,6 @@ services:
       context: .
       dockerfile: Dockerfile
     image: myapp:latest
-    ports:
-      - "2222:5000"
     deploy:
       mode: replicated
       replicas: 5
